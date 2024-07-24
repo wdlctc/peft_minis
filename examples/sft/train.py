@@ -7,6 +7,7 @@ from transformers import HfArgumentParser, TrainingArguments, set_seed
 from trl import SFTTrainer
 from utils import create_and_prepare_model, create_datasets
 
+from minis.mini_sequence_distributed import minisequence
 
 # Define and parse arguments.
 @dataclass
@@ -119,6 +120,8 @@ def main(model_args, data_args, training_args):
         training_args,
         apply_chat_template=model_args.chat_template_format != "none",
     )
+
+    model = minisequence(model)
 
     # trainer
     trainer = SFTTrainer(
