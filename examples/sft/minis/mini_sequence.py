@@ -142,7 +142,7 @@ class LlamaForCausalLMWarpper(nn.Module):
     def __init__(
         self,
         module,
-        mini_s = 16
+        mini_s = 32
     ):
         super().__init__()
         self.model = module.model

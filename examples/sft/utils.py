@@ -46,8 +46,8 @@ class ChatmlSpecialTokens(str, Enum):
 def create_datasets(tokenizer, data_args, training_args, apply_chat_template=False):
     def preprocess(samples):
         batch = []
-        for conversation in samples["messages"]:
-            batch.append(tokenizer.apply_chat_template(conversation, tokenize=False))
+        for conversation in samples["instruction"]:
+            batch.append(conversation)
         return {"content": batch}
 
     raw_datasets = DatasetDict()
@@ -61,8 +61,9 @@ def create_datasets(tokenizer, data_args, training_args, apply_chat_template=Fal
 
         if "train" in split:
             raw_datasets["train"] = dataset
-        elif "test" in split:
             raw_datasets["test"] = dataset
+        # elif "test" in split:
+        #     raw_datasets["test"] = dataset
         else:
             raise ValueError(f"Split type {split} not recognized as one of test or train.")
 
