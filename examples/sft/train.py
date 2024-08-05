@@ -121,7 +121,7 @@ def main(model_args, data_args, training_args):
         apply_chat_template=model_args.chat_template_format != "none",
     )
 
-    # model = minisequence(model)
+    model = minisequence(model)
 
     # trainer
     trainer = SFTTrainer(
